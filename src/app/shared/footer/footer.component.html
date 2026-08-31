@@ -1,0 +1,37 @@
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__col footer__brand">
+      <img [src]="site.logoUrlLight" alt="ISTD emblem" class="footer__logo" />
+      <p class="footer__motto">{{ site.motto }}</p>
+    </div>
+
+    <div class="footer__col">
+      <h4>Explore</h4>
+      <a routerLink="/about">About the Chapter</a>
+      <a routerLink="/committee">Committee</a>
+      <a routerLink="/events">Events &amp; Programmes</a>
+      <a routerLink="/membership">Membership</a>
+      <a routerLink="/questionnaire">Member Questionnaire</a>
+      <a routerLink="/gallery">Gallery</a>
+    </div>
+
+    <div class="footer__col">
+      <h4>Contact</h4>
+      <p *ngFor="let line of contact.addressLines">{{ line }}</p>
+      <p>{{ contact.phone }}</p>
+      <p>{{ contact.email }}</p>
+    </div>
+
+    <div class="footer__col">
+      <h4>Affiliations</h4>
+      <p>National body: ISTD, New Delhi</p>
+      <p>IFTDO — International Federation of Training &amp; Development Organisations</p>
+      <p>ARTDO — Asian Regional Training &amp; Development Organisation</p>
+    </div>
+  </div>
+
+  <div class="container footer__bottom">
+    <span>&copy; {{ year }} {{ site.chapterName }}. All rights reserved.</span>
+    <span>A Regional Chapter of the {{ site.orgName }}, Est. {{ site.established }}.</span>
+  </div>
+</footer>

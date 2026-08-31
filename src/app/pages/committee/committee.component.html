@@ -1,0 +1,52 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Governance</span>
+    <h1>Executive Committee</h1>
+    <p class="page-hero__sub">The office bearers and executive committee members who run the Bangalore Chapter's programmes, finances, and member services.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Organization structure</span>
+    <div class="org-chart">
+      <div class="org-chart__chair person-card card">
+        <div class="person-card__avatar" [ngClass]="'accent-' + accentFor(0)">
+          <img *ngIf="chairman.photoUrl; else chairmanInitials" [src]="chairman.photoUrl" [alt]="chairman.name" title="Committee member portrait" />
+          <ng-template #chairmanInitials>{{ initials(chairman.name) }}</ng-template>
+        </div>
+        <h3>{{ chairman.name }}</h3>
+        <p class="person-card__role">{{ chairman.designation }}</p>
+        <p class="person-card__org" *ngIf="chairman.organisation">{{ chairman.organisation }}</p>
+      </div>
+
+      <div class="people-grid people-grid--lead">
+      <div class="person-card card" *ngFor="let m of officeBearers; let i = index">
+        <div class="person-card__avatar person-card__avatar--sm" [ngClass]="'accent-' + accentFor(i + 1)">
+          <img *ngIf="m.photoUrl; else officeInitials" [src]="m.photoUrl" [alt]="m.name" title="Committee member portrait" />
+          <ng-template #officeInitials>{{ initials(m.name) }}</ng-template>
+        </div>
+        <h3>{{ m.name }}</h3>
+        <p class="person-card__role">{{ m.designation }}</p>
+        <p class="person-card__org" *ngIf="m.organisation">{{ m.organisation }}</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-deep">
+  <div class="container">
+    <span class="eyebrow">Executive committee members</span>
+    <div class="people-grid">
+      <div class="person-card card" *ngFor="let m of members; let i = index">
+        <div class="person-card__avatar person-card__avatar--sm" [ngClass]="'accent-' + accentFor(i + officeBearers.length)">
+          <img *ngIf="m.photoUrl; else memberInitials" [src]="m.photoUrl" [alt]="m.name" title="Committee member portrait" />
+          <ng-template #memberInitials>{{ initials(m.name) }}</ng-template>
+        </div>
+        <h3>{{ m.name }}</h3>
+        <p class="person-card__role">{{ m.designation }}</p>
+      </div>
+    </div>
+  </div>
+</section>

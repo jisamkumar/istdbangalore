@@ -1,0 +1,34 @@
+<div class="accent-stripe" aria-hidden="true"></div>
+
+<div class="topbar">
+  <div class="container topbar__row">
+    <div class="topbar__item">{{ contact.phone }}</div>
+    <div class="topbar__item">{{ contact.email }}</div>
+    <div class="topbar__item topbar__item--motto">Established {{ site.established }} &middot; Southern Region</div>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="container nav__row">
+    <a routerLink="/" class="nav__brand" (click)="closeMenu()">
+      <img [src]="site.logoUrl" alt="ISTD Bangalore Chapter" class="nav__logo" />
+      <span class="nav__chapter">BANGALORE<br />CHAPTER</span>
+    </a>
+
+    <nav class="nav__links" [class.nav__links--open]="menuOpen" aria-label="Main navigation">
+      <a *ngFor="let link of links"
+         [routerLink]="link.path"
+         routerLinkActive="is-active"
+         [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+         (click)="closeMenu()">
+        {{ link.label }}
+      </a>
+    </nav>
+
+    <button class="nav__toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav__backdrop" [class.nav__backdrop--visible]="menuOpen" (click)="closeMenu()" aria-hidden="true"></div>
+</header>

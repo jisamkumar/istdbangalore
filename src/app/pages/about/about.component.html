@@ -1,0 +1,49 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">About</span>
+    <h1>Building People & Organisations Since {{ site.established }}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container copy-block">
+    <p class="lede">{{ about.intro }}</p>
+
+    <h2>Our Mission</h2>
+    <p>{{ about.mission }}</p>
+
+    <h2>Our History</h2>
+    <p>{{ about.history }}</p>
+  </div>
+</section>
+
+<section class="section section--paper-deep">
+  <div class="container">
+    <span class="eyebrow">What We Do!</span>
+    <h2>How the Chapter supports India’s skill development agenda</h2>
+    <div class="pillars-grid">
+      <div class="pillar-card card" *ngFor="let p of about.pillars; let i = index" [ngClass]="'accent-' + pillarMeta[i].accent">
+        <div class="icon-badge" [ngClass]="'accent-' + pillarMeta[i].accent">
+          <svg *ngIf="pillarMeta[i].icon === 'award'" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+          <svg *ngIf="pillarMeta[i].icon === 'users'" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg *ngIf="pillarMeta[i].icon === 'network'" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v6M12 13.5L6.5 17M12 13.5L17.5 17"/></svg>
+        </div>
+        <h3>{{ p.title }}</h3>
+        <p>{{ p.text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Affiliations &amp; Recognitions</span>
+    <h2>Part of a National and International Network</h2>
+    <div class="affil-grid">
+      <div class="affil-item" *ngFor="let a of affiliations" [ngClass]="'accent-' + a.accent">
+        <h3>{{ a.name }}</h3>
+        <p>{{ a.detail }}</p>
+      </div>
+    </div>
+  </div>
+</section>

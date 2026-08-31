@@ -1,0 +1,127 @@
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container hero__row">
+    <div class="hero__copy">
+      <span class="eyebrow">Indian Society for Training &amp; Development</span>
+      <h1>Train & Skill<br />Building Nation<br /><em>Since {{ site.established }}</em></h1>
+      <p class="hero__lede">
+        Catylyse India's learning, skill development, and employability through trainer
+        development, workplace learning, digital capability, and a connected professional
+        ecosystem for a future-ready workforce.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/membership" class="btn btn--primary">Become a Member</a>
+        <a routerLink="/events" class="btn btn--outline-navy">View Upcoming Events</a>
+      </div>
+    </div>
+
+    <div
+      class="hero__carousel"
+      (mouseenter)="stopAutoplay()"
+      (mouseleave)="startAutoplay()"
+    >
+      <span class="eyebrow hero__carousel-eyebrow">What Is On!</span>
+      <div class="carousel">
+        <div
+          class="carousel__track"
+          [style.transform]="'translateX(-' + (slideIndex * 100) + '%)'"
+        >
+          <article class="carousel__slide" *ngFor="let e of upcomingEvents" [class.carousel__slide--image]="e.imageUrl">
+            <img *ngIf="e.imageUrl" class="carousel__image" [src]="e.imageUrl" [alt]="e.title" />
+            <div *ngIf="e.imageUrl" class="carousel__scrim"></div>
+            <div class="carousel__content">
+              <span class="tag" [ngClass]="'tag--' + e.mode.toLowerCase().replace('-', '')">{{ e.mode }}</span>
+              <p class="carousel__date">{{ e.date }}</p>
+              <h3>{{ e.title }}</h3>
+              <p class="carousel__desc">{{ e.description }}</p>
+              <a routerLink="/events" class="carousel__link">View Event Details →</a>
+            </div>
+          </article>
+        </div>
+
+        <button type="button" class="carousel__arrow carousel__arrow--prev" (click)="prev(); startAutoplay()" aria-label="Previous event">‹</button>
+        <button type="button" class="carousel__arrow carousel__arrow--next" (click)="next(); startAutoplay()" aria-label="Next event">›</button>
+      </div>
+
+      <div class="carousel__dots">
+        <button
+          type="button"
+          *ngFor="let e of upcomingEvents; let i = index"
+          class="carousel__dot"
+          [class.is-active]="i === slideIndex"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Go to slide ' + (i + 1)"
+        ></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS STRIP ============ -->
+<section class="stats">
+  <div class="container stats__row">
+    <div class="stats__item" *ngFor="let s of stats" [ngClass]="'accent-' + s.accent">
+      <span class="stats__value">{{ s.value }}</span>
+      <span class="stats__label">{{ s.label }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT TEASER ============ -->
+<section class="section">
+  <div class="container about-teaser">
+    <div class="about-teaser__text">
+      <span class="eyebrow">About the Chapter</span>
+      <h2>Transforming T&D for the Future</h2>
+      <p>{{ about.intro }}</p>
+      <a routerLink="/about" class="btn btn--outline-navy">Read Our Story</a>
+    </div>
+    <div class="about-teaser__pillars">
+      <div class="pillar" *ngFor="let p of about.pillars; let i = index" [ngClass]="'accent-' + pillarMeta[i].accent">
+        <div class="icon-badge" [ngClass]="'accent-' + pillarMeta[i].accent">
+          <svg *ngIf="pillarMeta[i].icon === 'award'" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+          <svg *ngIf="pillarMeta[i].icon === 'users'" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <svg *ngIf="pillarMeta[i].icon === 'network'" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v6M12 13.5L6.5 17M12 13.5L17.5 17"/></svg>
+        </div>
+        <div>
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UPCOMING EVENTS ============ -->
+<section class="section section--paper-deep">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">What Is On!</span>
+        <h2>Learn, lead, and prepare for what is next!</h2>
+      </div>
+      <a routerLink="/events" class="btn btn--outline-navy">Calendar</a>
+    </div>
+
+    <div class="event-grid">
+      <article class="event-card card" *ngFor="let e of upcomingEvents">
+        <span class="tag" [ngClass]="'tag--' + e.mode.toLowerCase().replace('-', '')">{{ e.mode }}</span>
+        <h3>{{ e.title }}</h3>
+        <p class="event-card__date">{{ e.date }}</p>
+        <p>{{ e.description }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section section--navy cta">
+  <div class="container cta__row">
+    <div>
+      <span class="eyebrow">Join the Society</span>
+      <h2>Build the capabilities that tomorrow's work demands</h2>
+      <p>Join a community working across trainer excellence, employability, digital learning, leadership, and lifelong development.</p>
+    </div>
+    <a routerLink="/membership" class="btn btn--primary">Explore Membership</a>
+  </div>
+</section>

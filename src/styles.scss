@@ -1,0 +1,262 @@
+/* ============================================================
+   ISTD BANGALORE CHAPTER — GLOBAL DESIGN TOKENS
+   Purple identity system: a rich amethyst primary with a deep
+   aubergine ground and soft orchid accent, in the register of a
+   certificate / institutional seal rather than a generic corp site.
+   (Token names below are unchanged from the previous red/navy/gold
+   system so every component that references them recolors
+   automatically — only the hex values have moved to purple.)
+   ============================================================ */
+
+:root {
+  /* ---- Color ---- */
+  --color-red: #6E2E93;        /* primary — amethyst, replaces vermilion */
+  --color-red-deep: #4A1D66;   /* pressed / hover state of primary */
+  --color-navy: #241041;       /* headers, footer, gravitas — deep aubergine */
+  --color-navy-soft: #38195C;
+  --color-gold: #A66DD4;       /* seal / ribbon accent — orchid, replaces gold */
+  --color-gold-soft: #DCC3F5;
+  --color-paper: #FAF7FC;      /* cool-lavender-tinted parchment background */
+  --color-paper-deep: #F0E9F7;
+  --color-ink: #211A2B;
+  --color-ink-soft: #5B5266;
+  --color-line: #DCCFEA;
+  --color-white: #FFFFFF;
+
+  /* ---- Multi-colour accent system ----
+     Used sparingly to code categories, pillars, tiers, and stats —
+     the register of an international professional body (IFTDO/ARTDO
+     style) rather than a single-hue corporate site. Red/navy/gold
+     remain the brand anchors; these rotate for wayfinding only. */
+  --color-teal: #0E7C7B;
+  --color-teal-soft: #DCF0EF;
+  --color-violet: #B0338C;
+  --color-violet-soft: #F5E0EE;
+  --color-sky: #1D6FA5;
+  --color-sky-soft: #DEEBF5;
+  --color-amber: #C97A1F;
+  --color-amber-soft: #F7E6CE;
+  --color-emerald: #2E7D4F;
+  --color-emerald-soft: #DEF0E3;
+
+  /* ---- Type ---- */
+  --font-display: 'Work Sans', -apple-system, sans-serif;
+  --font-body: 'Work Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* ---- Layout ---- */
+  --max-width: 1180px;
+  --radius: 12px;
+  --shadow-card: 0 1px 2px rgba(74,29,102,0.06), 0 12px 28px -14px rgba(74,29,102,0.28);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-navy);
+  margin: 0 0 0.5em;
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--color-red);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; display: block; }
+
+button { font-family: var(--font-body); }
+
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* ---- Shared utility classes used across page components ---- */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--color-red);
+  display: inline-block;
+}
+
+.section {
+  padding: 84px 0;
+}
+.section--tight { padding: 56px 0; }
+.section--navy {
+  background: linear-gradient(160deg, var(--color-navy-soft) 0%, var(--color-navy) 65%);
+  color: rgba(255,255,255,0.88);
+}
+.section--navy h1, .section--navy h2, .section--navy h3 {
+  color: var(--color-white);
+}
+.section--paper-deep { background: var(--color-paper-deep); }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 13px 26px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  text-decoration: none !important;
+}
+.btn--primary {
+  background: var(--color-red);
+  color: var(--color-white);
+}
+.btn--primary:hover { background: var(--color-red-deep); transform: translateY(-1px); }
+
+.btn--ghost {
+  background: transparent;
+  border-color: rgba(255,255,255,0.4);
+  color: var(--color-white);
+}
+.btn--ghost:hover { border-color: var(--color-gold-soft); color: var(--color-gold-soft); }
+
+.btn--outline-navy {
+  background: transparent;
+  border-color: var(--color-navy);
+  color: var(--color-navy);
+}
+.btn--outline-navy:hover { background: var(--color-navy); color: var(--color-white); }
+
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink-soft);
+  display: inline-block;
+}
+
+.placeholder-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--color-red);
+  background: #F5EBFB;
+  border: 1px dashed var(--color-red);
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  margin: 0 0 24px;
+}
+
+@media (max-width: 720px) {
+  .section { padding: 56px 0; }
+  .container { padding: 0 18px; }
+}
+
+/* ---- Shared inner-page hero banner ---- */
+.page-hero {
+  background:
+    radial-gradient(900px 420px at 90% -20%, rgba(166,109,212,0.22), transparent 60%),
+    linear-gradient(160deg, var(--color-navy-soft) 0%, var(--color-navy) 70%);
+  padding: 64px 0 52px;
+  border-bottom: 3px solid var(--color-gold);
+}
+.page-hero .eyebrow { color: var(--color-gold-soft); }
+.page-hero .eyebrow::before { background: var(--color-gold-soft); }
+.page-hero h1 {
+  color: var(--color-white);
+  font-size: clamp(28px, 3.6vw, 42px);
+  max-width: 760px;
+  margin: 0;
+}
+.page-hero p.page-hero__sub {
+  color: rgba(255,255,255,0.72);
+  max-width: 620px;
+  margin: 14px 0 0;
+  font-size: 16px;
+}
+
+/* ---- Multi-colour accent utilities ----
+   Cycle these across repeated items (pillars, stats, tiers, tags)
+   to give the site the coded, wayfinding palette of an international
+   professional body rather than a flat single-hue look. */
+.accent-red    { --accent: var(--color-red);    --accent-soft: #FBE4E3; }
+.accent-teal   { --accent: var(--color-teal);    --accent-soft: var(--color-teal-soft); }
+.accent-violet { --accent: var(--color-violet);  --accent-soft: var(--color-violet-soft); }
+.accent-sky    { --accent: var(--color-sky);     --accent-soft: var(--color-sky-soft); }
+.accent-amber  { --accent: var(--color-amber);   --accent-soft: var(--color-amber-soft); }
+.accent-emerald{ --accent: var(--color-emerald); --accent-soft: var(--color-emerald-soft); }
+.accent-gold   { --accent: var(--color-gold);    --accent-soft: var(--color-gold-soft); }
+
+.icon-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--accent-soft, var(--color-paper-deep));
+  color: var(--accent, var(--color-red));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-badge svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+}
+
+/* Mode tags used on Home + Events pages */
+.tag--inperson { border-color: var(--color-teal); color: var(--color-teal); background: var(--color-teal-soft); }
+.tag--online { border-color: var(--color-sky); color: var(--color-sky); background: var(--color-sky-soft); }
+.tag--hybrid { border-color: var(--color-violet); color: var(--color-violet); background: var(--color-violet-soft); }

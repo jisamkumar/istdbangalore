@@ -1,0 +1,38 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Calendar</span>
+    <h1>Events &amp; Programmes</h1>
+    <p class="page-hero__sub">Practical learning experiences aligned to India’s skill development agenda, workforce transformation, digital capability, and trainer excellence.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="placeholder-note">Programme dates are indicative until confirmed by the chapter office.</p>
+
+    <div class="filters">
+      <button class="filter-btn" [class.is-active]="filter === 'Upcoming'" (click)="setFilter('Upcoming')">Upcoming</button>
+      <button class="filter-btn" [class.is-active]="filter === 'Past'" (click)="setFilter('Past')">Past</button>
+      <button class="filter-btn" [class.is-active]="filter === 'All'" (click)="setFilter('All')">All</button>
+    </div>
+
+    <div class="event-list">
+      <article class="event-row card" *ngFor="let e of filtered">
+        <div class="event-row__date">
+          <span class="tag" [ngClass]="'tag--' + e.mode.toLowerCase().replace('-', '')">{{ e.mode }}</span>
+          <p>{{ e.date }}</p>
+        </div>
+        <div class="event-row__body">
+          <h3>{{ e.title }}</h3>
+          <p class="event-row__venue" *ngIf="e.venue">{{ e.venue }}</p>
+          <p>{{ e.description }}</p>
+        </div>
+        <div class="event-row__status" [class.is-past]="e.status === 'Past'">
+          {{ e.status }}
+        </div>
+      </article>
+
+      <p *ngIf="!filtered.length" class="empty-state">No events in this view yet.</p>
+    </div>
+  </div>
+</section>

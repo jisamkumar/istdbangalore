@@ -1,0 +1,76 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Get in touch</span>
+    <h1>Contact the Chapter Office</h1>
+    <p class="page-hero__sub">Questions about membership, skill development programmes, training initiatives, or upcoming events — reach out to the chapter team.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <p class="placeholder-note">⚠ Placeholder address/phone — confirm current chapter contact details.</p>
+
+      <div class="info-block">
+        <h3>Address</h3>
+        <p *ngFor="let line of contact.addressLines">{{ line }}</p>
+      </div>
+      <div class="info-block">
+        <h3>Phone</h3>
+        <p><a [href]="'tel:' + contact.phone">{{ contact.phone }}</a></p>
+      </div>
+      <div class="info-block">
+        <h3>Email</h3>
+        <p><a [href]="'mailto:' + contact.email">{{ contact.email }}</a></p>
+      </div>
+      <div class="info-block">
+        <h3>Office hours</h3>
+        <p>{{ contact.officeHours }}</p>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          [src]="mapUrl"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Chapter office location">
+        </iframe>
+      </div>
+    </div>
+
+    <form class="contact-form card" #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <h3>Send a message</h3>
+
+      <div class="form-row" *ngIf="submitted">
+        <p class="success-msg">Thanks — your message has been noted. This is a demo form; connect it to a real mail service before going live.</p>
+      </div>
+
+      <label>
+        Name
+        <input type="text" name="name" [(ngModel)]="model.name" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="model.email" required email />
+      </label>
+
+      <label>
+        Subject
+        <select name="subject" [(ngModel)]="model.subject">
+          <option>Membership enquiry</option>
+          <option>Diploma programme</option>
+          <option>Event enquiry</option>
+          <option>Other</option>
+        </select>
+      </label>
+
+      <label>
+        Message
+        <textarea name="message" rows="5" [(ngModel)]="model.message" required></textarea>
+      </label>
+
+      <button type="submit" class="btn btn--primary" [disabled]="f.invalid">Send Message</button>
+    </form>
+  </div>
+</section>

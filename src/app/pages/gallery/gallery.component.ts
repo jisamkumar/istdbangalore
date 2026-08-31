@@ -1,0 +1,14 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { GALLERY } from '../../data/content';
+
+@Component({
+  selector: 'app-gallery',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './gallery.component.html',
+  styleUrl: './gallery.component.scss',
+})
+export class GalleryComponent {
+  gallery = GALLERY;
+}

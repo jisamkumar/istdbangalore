@@ -1,0 +1,237 @@
+.qform-container {
+  max-width: 840px;
+}
+
+.qform {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.qform-fieldset {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  border-top: 3px solid var(--accent, var(--color-red));
+  background: var(--color-white);
+  padding: 26px 26px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.qform-fieldset legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 19px;
+  color: var(--color-navy);
+  padding: 0 6px;
+  font-weight: 600;
+}
+
+.qform-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-soft, var(--color-paper-deep));
+  color: var(--accent, var(--color-red));
+  font-family: var(--font-mono);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qform-hint {
+  font-size: 13.5px;
+  color: var(--color-ink-soft);
+  margin: 6px 0 14px;
+}
+
+.qform-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 20px;
+  margin-top: 12px;
+}
+
+.qfield {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-navy);
+}
+.qfield--full { grid-column: 1 / -1; }
+.qfield--inline {
+  margin-top: 10px;
+  max-width: 340px;
+}
+
+.qfield input[type="text"],
+.qfield input[type="email"],
+.qfield input[type="tel"],
+.qfield input[type="number"],
+.qfield input[type="url"],
+.qfield input[type="date"],
+.qfield input[type="file"],
+.qfield textarea {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 400;
+  padding: 10px 12px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.qfield input:focus, .qfield textarea:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 1px;
+}
+
+.qfile-name {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--color-teal);
+  font-weight: 400;
+}
+
+.qform-subblock {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-line);
+}
+.qform-subblock:first-of-type {
+  margin-top: 14px;
+}
+.qform-subblock h4 {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin: 0 0 4px;
+}
+
+.qform-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 10px;
+}
+.qcheck {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.qcheck input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent, var(--color-red));
+  cursor: pointer;
+}
+.qcheck--declaration {
+  align-items: flex-start;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.qcheck--declaration input {
+  margin-top: 3px;
+}
+
+.qform-radios {
+  display: flex;
+  gap: 20px;
+  margin-top: 8px;
+}
+.qradio {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+}
+.qradio input {
+  accent-color: var(--color-amber);
+  width: 16px;
+  height: 16px;
+}
+
+.qform-conditional {
+  margin-top: 18px;
+  padding: 18px 18px 4px;
+  background: var(--color-paper-deep);
+  border-radius: var(--radius);
+  border: 1px dashed var(--color-gold);
+}
+
+.qform-submit-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+.qform-submit-hint {
+  font-size: 13px;
+  color: var(--color-red);
+  margin: 0;
+}
+
+.qform--readonly {
+  pointer-events: none;
+}
+.qform--readonly input,
+.qform--readonly textarea {
+  background: var(--color-paper-deep);
+  opacity: 0.85;
+}
+.qform--readonly .qform-conditional {
+  border-style: solid;
+}
+.submitted-card {
+  padding: 44px;
+  text-align: center;
+}
+.submitted-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-emerald-soft);
+  color: var(--color-emerald);
+  font-size: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+.submitted-card p {
+  color: var(--color-ink-soft);
+  max-width: 520px;
+  margin: 0 auto 24px;
+}
+.submitted-card__actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .qform-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Print stylesheet — used by the "Print / Save as PDF" button ---- */
+@media print {
+  app-navbar, app-footer, .page-hero, .placeholder-note, .qform-submit-row {
+    display: none !important;
+  }
+  body, .section { background: #fff !important; padding: 0 !important; }
+  .submitted-card { box-shadow: none; border: none; }
+  .submitted-card__actions { display: none !important; }
+}
