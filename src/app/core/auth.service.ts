@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../environments/environment.prod';
 
 interface AuthResponse {
   message?: string;
@@ -18,8 +17,7 @@ export class AuthService {
   private readonly fullNameKey = 'istd-member-full-name';
   private readonly mobileKey = 'istd-member-mobile';
   private readonly memberTypeKey = 'istd-member-type';
-  private apiUrl = environment.apiUrl;
-  private readonly apiURL = '${this.apiUrl}/auth';
+  private readonly apiURL = 'auth';
 
   constructor(private http: HttpClient) {}
 

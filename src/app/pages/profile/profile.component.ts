@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CONTACT } from '../../data/content';
 import { AuthService } from '../../core/auth.service';
-import { environment } from '../../../environments/environment.prod';
 
 interface CheckboxOption {
   key: string;
@@ -39,10 +38,8 @@ export class ProfileComponent implements OnInit {
     { value: 'Institutional', label: 'Institutional' },
     { value: 'Student Chapter', label: 'Student Chapter' },
   ];
-
-  private apiUrl = environment.apiUrl;
   
-  private readonly profilesApiUrl = '${this.apiUrl}/api/profiles';
+  private readonly profilesApiUrl = 'api/profiles';
   private readonly profileStorageKey = 'istd-member-profile';
   private profileSnapshot: any = null;
 
