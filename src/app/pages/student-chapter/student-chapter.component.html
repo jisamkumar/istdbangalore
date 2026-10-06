@@ -1,0 +1,119 @@
+<section class="student-hero">
+  <div class="container student-hero__grid">
+    <div class="student-hero__copy">
+      <span class="eyebrow">Student Chapter</span>
+      <h1>Build an ISTD Student Chapter at your Campus.</h1>
+      <p>{{ about.intro }}</p>
+      <div class="student-hero__actions">
+        <a routerLink="/contact" class="btn btn--primary">Start ISTD Student Chapter</a>
+        <a href="#student-experience" class="btn btn--ghost">Explore the experience</a>
+      </div>
+      <div class="student-hero__note">
+        <span>For institutions, faculty coordinators, and student leaders</span>
+      </div>
+    </div>
+    <div class="student-hero__visual">
+      <img src="assets/1.jpg" alt="ISTD Bangalore learning programme" />
+      <div class="student-hero__caption">
+        <span>ISTD Student Chapter</span>
+        <strong>Learning beyond Classroom.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter-stats" aria-label="Student chapter highlights">
+  <div class="container chapter-stats__grid">
+    <div class="chapter-stat" *ngFor="let stat of stats">
+      <strong>{{ stat.value }}</strong>
+      <span>{{ stat.label }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="section institution-section">
+  <div class="container institution-section__grid">
+    <div>
+      <span class="eyebrow">For the Institution</span>
+      <h2>Turn professional Membership into a Campus advantage.</h2>
+      <p class="section-lead">{{ about.mission }}</p>
+      <a routerLink="/membership" class="text-link">View institutional membership <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="institution-benefits">
+      <article class="institution-benefit" *ngFor="let benefit of institutionBenefits; let i = index" [ngClass]="'accent-' + ['red', 'teal', 'amber', 'violet'][i]">
+        <span class="institution-benefit__number">0{{ i + 1 }}</span>
+        <div>
+          <h3>{{ benefit.title }}</h3>
+          <p>{{ benefit.text }}</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-deep" id="student-experience">
+  <div class="container">
+    <div class="section-heading-row">
+      <div>
+        <span class="eyebrow">For students</span>
+        <h2>A stronger first step into the profession.</h2>
+      </div>
+      <p>Students experience ISTD through practical exposure, generous access to peers and practitioners, and a community that continues beyond graduation.</p>
+    </div>
+    <div class="experience-grid">
+      <article class="experience-card" *ngFor="let benefit of benefits; let i = index" [ngClass]="'accent-' + ['red', 'teal', 'violet', 'amber', 'sky', 'emerald'][i]">
+        <span class="experience-card__icon">{{ i + 1 | number: '2.0' }}</span>
+        <h3>{{ benefit.title }}</h3>
+        <p>{{ benefit.text }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section chapter-process">
+  <div class="container">
+    <div class="section-heading-row section-heading-row--process">
+      <div>
+        <span class="eyebrow">A clear route to launch</span>
+        <h2>From interest to an active chapter.</h2>
+      </div>
+      <p>Bring together institutional sponsor and a small group of motivated Students. ISTD Bangalore helps you shape the first conversation and the first programme.</p>
+    </div>
+    <div class="process-grid">
+      <article class="process-step" *ngFor="let step of joinProcess">
+        <span>{{ step.step }}</span>
+        <h3>{{ step.title }}</h3>
+        <p>{{ step.text }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section eligibility-section">
+  <div class="container eligibility-section__grid">
+    <div>
+      <span class="eyebrow">Good to know</span>
+      <h2>Who is this for?</h2>
+      <p>Student Chapters work best when Institutions make room for consistent activity and Students take ownership of the community.</p>
+    </div>
+    <div class="eligibility-list">
+      <div class="eligibility-item" *ngFor="let requirement of requirements">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+        <span>{{ requirement }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter-cta" id="join">
+  <div class="container chapter-cta__inner">
+    <div>
+      <span class="eyebrow">Take the next step</span>
+      <h2>Ready to put learning into motion?</h2>
+      <p>Tell us about your Institution or your Student team. We will help you find the right starting point.</p>
+    </div>
+    <div class="chapter-cta__actions">
+      <a routerLink="/contact" class="btn btn--primary">Contact ISTD Bangalore</a>
+    </div>
+  </div>
+</section>

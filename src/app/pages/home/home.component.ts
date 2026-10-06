@@ -57,10 +57,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   stats = [
-    { value: '55+', label: 'Years as a Chapter of ISTD', accent: 'red' },
-    { value: '1,000+', label: 'PG Diploma Graduates Trained', accent: 'teal' },
-    { value: '24', label: 'Successful Skill Training/Assessments', accent: 'violet' },
-    { value: '3', label: 'Membership Options: Individual, Institutional, and Student', accent: 'amber' },
+    { value: '600 +', label: 'Bangalore Chapter Members', accent: 'red' },
+    { value: '100 +', label: 'Bangalore Student Chapters', accent: 'teal' },
+    { value: '100000 +', label: 'Successful Skill Training/Assessments', accent: 'violet' },
+    { value: '1000 +', label: 'PG Diploma Graduates Trained', accent: 'amber' },
   ];
 
   pillarMeta = [

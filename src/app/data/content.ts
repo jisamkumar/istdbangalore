@@ -17,7 +17,7 @@ export interface CommitteeMember {
 export interface EventItem {
   title: string;
   date: string;       // display string, e.g. "14 Sep 2026"
-  mode: 'In-person' | 'Online' | 'Hybrid';
+  mode: 'In-Person' | 'Online' | 'Hybrid';
   imageUrl?: string;
   venue?: string;
   description: string;
@@ -38,7 +38,7 @@ export const SITE = {
   motto: 'Skill, learning, and capability development for a future-ready India',
   established: '1970', // parent Society founding year
   logoUrl: 'assets/istd-logo-purple.png',       // for light backgrounds (navbar, hero seal)
-  logoUrlLight: 'assets/istd-logo-white.jpeg',   // for dark backgrounds (footer)
+  logoUrlLight: 'assets/istd-logo-purple.png',   // ISTD logo used in the footer
 };
 
 // ⚠ PLACEHOLDER — confirm current chapter address/contact
@@ -48,21 +48,28 @@ export const CONTACT = {
     'Wood Street, Ashok Nagar,',
     'Bengaluru – 560 025, Karnataka',
   ],
-  phone: '+91 80 0000 0000',
-  email: 'contact@istdbangalore.com',
+  phone: '',
+  email: 'chapter@istdbangalore.com',
   officeHours: 'Mon–Fri, 10:00 AM – 5:30 PM',
   mapEmbedUrl: 'https://www.google.com/maps?q=Casa+Capitol+Wood+Street+Ashok+Nagar+Bengaluru&output=embed',
+  socialLinks: [
+    { label: 'LinkedIn', url: 'https://in.linkedin.com/in/ISTDBangalore', icon: 'linkedin' },
+    { label: 'X', url: 'https://x.com/ISTDBangalore', icon: 'x' },
+    { label: 'Facebook', url: 'https://www.facebook.com/ISTDBangalore', icon: 'facebook' },
+    { label: 'Instagram', url: 'https://www.instagram.com/ISTDBangalore', icon: 'instagram' },
+    { label: 'YouTube', url: 'https://www.youtube.com/@ISTDBangalore', icon: 'youtube' },
+  ],
 };
 
 // ⚠ PLACEHOLDER — replace with the About copy specific to the Bangalore chapter
 export const ABOUT = {
-  intro: `The ISTD Bangalore Chapter supports the Nation for training, skill development, employability, and lifelong learning in line with the National Mission and the evolving needs of a digital and innovation-led economy. The Chapter brings together HR and L&D professionals, trainers, educators, employers, and institutions across Karnataka to build practical, inclusive, and outcomes-focused learning ecosystems.`,
-  mission: `To strengthen people, organisations, and institutions through training and development that is evidence-based, industry-relevant, and future-ready. ISTD Bangalore enables capability building for professionals, youth, academia, enterprise, and public institutions across the skill, learning, leadership, and workforce development landscape.`,
+  intro: `The ISTD Bangalore Chapter supports the Nation on training, skill development, employability, and lifelong learning in line with the National Mission and the evolving needs of a digital and innovation-led economy. The Chapter brings together L&D and HR professionals, trainers, educators, institutions, and employers across Karnataka to build practical, inclusive, and outcome-focused learning ecosystems.`,
+  mission: `To strengthen people, institutions, and organisations through training and development that is evidence-based, industry-relevant, and future-ready. ISTD Bangalore enables capability building for youth, professionals, academia, enterprise, and public institutions across the skill, learning, leadership, and workforce development landscape.`,
   history: `The Indian Society for Training & Development is a national-level professional and non-profit body established in April 1970 and registered under the Societies Registration Act, 1860. The Bangalore Chapter contributes to ISTD’s national mission by advancing trainer development, continuing education, professional exchange, and sector-linked learning programmes aligned with the changing priorities of the Indian economy, including digital skills, employability, entrepreneurship, and sustainable livelihoods.`,
   pillars: [
-    { title: 'TRAIN & ASSESS', text: 'Build workforce capability through competency-based learning, practice-oriented training, assessing, and structured pathways across sectors.' },
-    { title: 'CONNECT EXPERTISE', text: 'Create forums where industry, academia, trainers, learners, and public institutions can collaborate on practical solutions for employability and learning effectiveness.' },
-    { title: 'BUILD WORKFORCE', text: 'Support youth and professionals with digital fluency, leadership, entrepreneurship, and career readiness aligned to India’s evolving skill ecosystem.' }
+    { title: 'TRAIN & ASSESS', text: 'Build workforce capability through competency-based learning, practice-oriented training, assessments, and structured pathways across sectors.' },
+    { title: 'CONNECT EXPERTISE', text: 'Create forums where public organizations, industries, institutions, trainers, and students can collaborate on realtime solutions for employability and learning effectiveness.' },
+    { title: 'BUILD FUTURE', text: 'Support youth and professionals with digital fluency, leadership, entrepreneurship, and career readiness aligned to the evolving skill ecosystem.' }
   ]
 };
 
@@ -75,79 +82,82 @@ export const COMMITTEE: CommitteeMember[] = [
   { name: 'Megha S.', designation: 'MC Member', photoUrl: 'assets/committee/mc-member3.jpeg' },
   { name: 'Roopa S.', designation: 'MC Member', photoUrl: 'assets/committee/mc-member1.jpeg' },
   { name: 'Arjun Manohar', designation: 'MC Member', photoUrl: 'assets/committee/mc-member2.jpeg' },
-  { name: 'Sunand Sampath', designation: 'MC Member', photoUrl: 'assets/committee/mc-member3.jpeg' }
+  { name: 'Sunand Sampath', designation: 'MC Member', photoUrl: 'assets/committee/mc-member4.jpeg' }
 ];
 
 // ⚠ PLACEHOLDER — replace with the real events calendar
 export const EVENTS: EventItem[] = [
   {
-    title: 'Leadership For Social Transformation',
-    date: '7 Sep 2026',
+    title: 'Intrapreneurship',
+    date: '12 September 2026',
     mode: 'Online',
-    imageUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85',
-    venue: 'Microsoft Teams',
-    description: 'Leadership for Social Change is designed to equip participants with the knowledge, skills and practical tools required to lead social initiatives, engage communities and create sustainable social impact.',
-    status: 'Upcoming',
-  },
-  {
-    title: 'Monthly Chapter Meet: AI in Corporate Learning',
-    date: '28 Aug 2026',
-    mode: 'Hybrid',
-    imageUrl: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=85',
-    venue: 'Chapter Office + Online',
-    description: 'A member session on using AI responsibly for content development, assessment, productivity, and personalised learning paths.',
-    status: 'Upcoming',
-  },
-  {
-    title: 'Southern Region Conference 2026',
-    date: '20–21 Nov 2026',
-    mode: 'In-person',
-    imageUrl: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1600&q=85',
-    venue: 'Bengaluru (venue TBA)',
-    description: 'The annual gathering of ISTD chapters across South India, exploring future skills, workforce transitions, learning innovation, and inclusive growth.',
-    status: 'Upcoming',
-  },
-  {
-    title: 'Workshop: Training Needs Analysis for L&D Teams',
-    date: '18 Mar 2026',
-    mode: 'Online',
-    description: 'A practitioner workshop on diagnosing capability gaps and translating evidence into a focused learning and performance plan.',
+    imageUrl: 'assets/1.jpg',
+    description: 'The key to remain relevant and achieve success in the BANI (Brittle, Anxious, Non-Linear, and Incomprehensible) world is by learning how to renew yourself constantly.',
     status: 'Past',
+  },
+  {
+    title: 'From Learning to Behaviour Change',
+    date: '12 September 2026',
+    mode: 'Online',
+    imageUrl: 'assets/1.jpg',
+    description: 'Why Training does not always create the Performance?',
+    status: 'Upcoming',
+  },
+  {
+    title: 'Distruptive Innovation',
+    date: '3 October 2026',
+    mode: 'In-Person',
+    imageUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85',
+    description: 'The world is changing faster than ever. Technologies, customer expectations, business models and workplace practices that seemed futuristic yesterday are becoming everyday realities today.',
+    status: 'Upcoming',
+  },
+  {
+    title: 'ISTD Bangalore Chapter Conference 2026',
+    date: 'To be scheduled',
+    mode: 'In-Person',
+    imageUrl: 'https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1600&q=85',
+    venue: 'Will be announced',
+    description: 'A Bangalore Chapter Conference on the Future of Training & Employment.',
+    status: 'Upcoming',
   },
 ];
 
-// ⚠ PLACEHOLDER — confirm current fee structure with the chapter office
 export const MEMBERSHIP: MembershipTier[] = [
   {
     name: 'Individual Member',
-    audience: 'Practising trainers, HR/L&D professionals',
-    fee: '₹[amount] / year',
+    audience: 'For individuals joining ISTD in a professional or personal capacity',
+    fee: 'Annual: ₹1,534 / year · Life: ₹9,204 one-time',
     benefits: [
-      'Voting rights at chapter general body meetings',
-      'Discounted fees on Diploma and certificate programmes',
-      'Access to the Indian Journal of Training & Development',
-      'Invitations to chapter meets and the Southern Region Conference',
+      'Entrance fee: ₹300 for either category',
+      'Annual subscription: ₹1,000 (April–March)',
+      'Annual GST at 18%: ₹234',
+      'Life membership subscription: ₹7,500',
+      'Life membership GST at 18%: ₹1,404',
+      'Renewal: ₹1,180 / year (₹1,000 subscription + ₹180 GST)',
+    ],
+  },
+  {
+    name: 'Associate Member',
+    audience: 'For associate members joining ISTD for professional development',
+    fee: '₹826 / year (April–March)',
+    benefits: [
+      'Entrance fee: ₹300',
+      'Annual subscription: ₹400',
+      'GST at 18%: ₹126',
+      'Total annual fees: ₹826',
     ],
   },
   {
     name: 'Institutional Member',
-    audience: 'Training institutes, corporate L&D departments',
-    fee: '₹[amount] / year',
+    audience: 'For training institutes, organisations, and corporate L&D departments',
+    fee: 'Annual: ₹15,340 · Conversion to life: ₹92,040',
     benefits: [
-      'Multiple nominated representatives',
-      'Priority access to workplace learning and in-house training collaborations',
-      'Listing in the chapter\u2019s institutional directory',
-      'Access to the Indian Journal of Training & Development',
-    ],
-  },
-  {
-    name: 'Student Member',
-    audience: 'Students enrolled in HR / L&D programmes',
-    fee: '₹[amount] / year',
-    benefits: [
-      'Concessional Diploma and certificate programme fees',
-      'Mentorship and career conversations through chapter members',
-      'Eligibility for student paper presentations',
+      'Annual entrance fee: ₹3,000',
+      'Annual subscription: ₹10,000 (April–March)',
+      'Annual GST at 18%: ₹2,340',
+      'Conversion to life membership: ₹75,000 subscription',
+      'Conversion GST at 18%: ₹14,040',
+      'Renewal: ₹11,800 / year (₹10,000 subscription + ₹1,800 GST)',
     ],
   },
 ];

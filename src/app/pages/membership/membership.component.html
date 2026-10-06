@@ -1,15 +1,12 @@
 <section class="page-hero">
   <div class="container">
-    <span class="eyebrow">Join the network</span>
-    <h1>Membership for learning and development professionals</h1>
-    <p class="page-hero__sub">Connect with a professional community advancing skill development, employability, trainer capability, leadership, and workforce learning across India.</p>
+    <span class="eyebrow">Membership</span>
+    <h1>Join the Network</h1>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <p class="placeholder-note">⚠ Placeholder fees — confirm current amounts with the chapter office before publishing.</p>
-
     <div class="tier-grid">
       <div class="tier-card card" *ngFor="let t of tiers; let i = index" [class.tier-card--featured]="i === 0" [ngClass]="'accent-' + tierMeta[i].accent">
         <div class="icon-badge">
@@ -17,14 +14,13 @@
           <svg *ngIf="tierMeta[i].icon === 'building'" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg>
           <svg *ngIf="tierMeta[i].icon === 'cap'" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5-10-5z"/><path d="M6 11v5c0 1.5 2.5 3 6 3s6-1.5 6-3v-5"/></svg>
         </div>
-        <span class="tag" *ngIf="i === 0">Most common</span>
         <h3>{{ t.name }}</h3>
         <p class="tier-card__audience">{{ t.audience }}</p>
         <p class="tier-card__fee">{{ t.fee }}</p>
         <ul>
           <li *ngFor="let b of t.benefits">{{ b }}</li>
         </ul>
-        <a href="mailto:{{ contact.email }}" class="btn" [class.btn--primary]="i === 0" [class.btn--outline-navy]="i !== 0">Enquire to join</a>
+        <a href="mailto:{{ contact.email }}" class="btn" [class.btn--primary]="i === 0" [class.btn--outline-navy]="i !== 0">Enquire to Join</a>
       </div>
     </div>
   </div>
@@ -32,8 +28,8 @@
 
 <section class="section section--paper-deep">
   <div class="container">
-    <span class="eyebrow">How it works</span>
-    <h2>Applying for membership</h2>
+    <span class="eyebrow">How it works!</span>
+    <h2>Applying for Membership</h2>
     <div class="steps">
       <div class="step" *ngFor="let s of steps; let i = index">
         <span class="step__num">{{ i + 1 }}</span>
@@ -45,8 +41,8 @@
     </div>
 
     <div class="steps-cta">
-      <a routerLink="/questionnaire" class="btn btn--primary">Fill the Member Questionnaire</a>
-      <p>Already applying or renewing? Complete the chapter's member questionnaire so we can match you to trainer, assessor, and collaboration opportunities.</p>
+      <a routerLink="/profile" class="btn btn--primary">View or Create Your Profile</a>
+      <p>Already applying or renewing? Create your Profile so we can match you to trainer, assessor, and collaboration opportunities.</p>
     </div>
   </div>
 </section>

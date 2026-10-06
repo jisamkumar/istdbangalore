@@ -46,25 +46,20 @@ src/app/
     membership/             ← tiers + how-to-join steps
     gallery/               ← photo grid (placeholder tiles until photos added)
     contact/               ← contact info, map, demo form
-    questionnaire/         ← Member Questionnaire (9-section reactive form)
+    profile/               ← Member Profile (9-section reactive form)
 public/assets/istd-logo.png ← your uploaded logo
 ```
 
-## Member Questionnaire (`/questionnaire`)
+## Member Profile (`/profile`)
 
-A full reactive-form implementation of the chapter's Member Questionnaire
-(personal + professional details, preferred role, training preferences,
-company representation, major clients, uploads, and declaration — mirroring
-`ISTD_BC_Questionnaire_2026.docx`). Notes:
+A reactive profile form for personal and professional details, preferred role,
+training preferences, company representation, major clients, files, and declaration.
+The page checks the signed-in member's email against the profiles API before
+allowing profile creation, then displays the saved profile read-only.
 
-- **Demo submission only** — like the contact form, it confirms in-page but
-  doesn't send data anywhere. Wire `onSubmit()` in
-  `questionnaire.component.ts` to a real backend before going live.
 - **File uploads are simulated** — filenames are captured for display, not
   file contents. A real backend/file storage integration is needed to
   actually receive uploaded files.
-- After submission, the filled form stays visible (read-only) so the
-  **"Print / Save as PDF"** button produces a usable record of the response.
 - Conditional company fields (Section 6) only appear once "Yes" is selected
   for company representation.
 

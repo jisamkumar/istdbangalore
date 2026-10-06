@@ -1,0 +1,477 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Profile</span>
+    <h1>Profile Update Form</h1>
+    <p class="page-hero__sub">Fields marked with an asterisk (*) are mandatory.</p>
+  </div>
+</section>
+
+<section class="section qform-section">
+  <div class="container qform-container">
+
+    <p class="qform-submit-hint" *ngIf="isProfileLoading" role="status">Loading Profile</p>
+    <div class="submitted-card card" *ngIf="profileLoadError" role="alert">
+      <p>{{ profileLoadError }}</p>
+      <button type="button" class="btn btn--primary" (click)="retryProfileLoad()">Retry</button>
+    </div>
+
+    <div class="submitted-card card" *ngIf="profileLoaded && !profile && !profileLoadError && !isCreatingProfile">
+      <h2>No Profile submitted</h2>
+      <p>Create Profile</p>
+      <div class="submitted-card__actions">
+        <button class="btn btn--primary" type="button" (click)="createProfile()">Create Profile</button>
+      </div>
+    </div>
+
+    <div class="submitted-card card" *ngIf="submitted || profile">
+      <div class="submitted-card__icon">✓</div>
+      <h2>Your Profile</h2>
+      <div class="profile-summary" *ngIf="profile">
+        <div class="profile-summary__heading">
+          <div>
+            <span class="eyebrow">Saved Profile</span>
+            <h3>{{ profile.fullName }}</h3>
+          </div>
+          <span class="tag">{{ profile.membershipId }}</span>
+        </div>
+
+        <div class="profile-summary__grid">
+          <div><span>Member Type</span><strong>{{ profile.memberType || (profile.isStudent === 'Yes' ? 'Student' : 'Candidate') }}</strong></div>
+          <div><span>Email</span><strong>{{ profile.email }}</strong></div>
+          <div><span>Mobile</span><strong>{{ profile.mobile }}</strong></div>
+          <div><span>Designation</span><strong>{{ profile.designation }}</strong></div>
+          <div><span>Organization</span><strong>{{ profile.organization }}</strong></div>
+          <div><span>Preferred Location</span><strong>{{ profile.preferredLocation || 'Not specified' }}</strong></div>
+          <div><span>Would like to Volunteer</span><strong>{{ profile.wouldLikeToVolunteer || profile.preferredRoles?.wouldLikeToVolunteer || 'Not specified' }}</strong></div>
+        </div>
+
+        <div class="profile-summary__student" *ngIf="profile.isStudent === 'Yes'">
+          <span class="eyebrow">Student Details</span>
+          <p><strong>{{ profile.institution }}</strong> · {{ profile.course }} · {{ profile.yearOfStudy }}</p>
+          <small>Student Id: {{ profile.studentId }}</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="submitted-card__actions profile-actions" *ngIf="profile">
+      <button class="btn btn--ghost-dark" type="button" (click)="viewProfile()">View Profile</button>
+      <button class="btn btn--ghost-dark" type="button" (click)="editProfile()">Edit Profile</button>
+      <button class="btn btn--primary" type="button" (click)="printForm()">Print / Save as PDF</button>
+    </div>
+
+    <form *ngIf="profileLoaded && (!profile || isCreatingProfile || isEditing || isViewingProfile)" class="qform" [class.qform--readonly]="submitted" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="qform-header" style="margin-bottom: 1.5rem;">
+        <h2>{{ profileTypeTitle }}</h2>
+      </div>
+
+      <!-- ============ 1. PERSONAL DETAILS ============ -->
+      <fieldset class="qform-fieldset" formGroupName="personal">
+        <legend><span class="qform-num">1</span> Personal Details</legend>
+
+        <div class="qform-grid">
+          <label class="qfield qfield--full">
+            Member Type *
+            <div class="qfield-readonly">{{ selectedMemberType }}</div>
+          </label>
+          <label class="qfield">
+            {{ ['Individual','Institutional','Student Chapter'].includes(selectedMemberType) ? 'ISTD Member Id *' : 'ISTD Member Id' }}
+            <input type="text" formControlName="membershipId" />
+          </label>
+          <label class="qfield">
+            Full Name *
+            <input type="text" formControlName="fullName" />
+          </label>
+          <label class="qfield qfield--full">
+            Address with Postal Code *
+            <textarea rows="2" formControlName="address"></textarea>
+          </label>
+          <label class="qfield">
+            Email Id *
+            <input type="email" formControlName="email" [readonly]="!!profile" />
+          </label>
+          <label class="qfield">
+            Mobile Phone Number *
+            <input type="tel" formControlName="mobile" />
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="qform-fieldset accent-sky" *ngIf="showStudentFields" formGroupName="studentDetails">
+        <legend><span class="qform-num">S</span> Student Details</legend>
+        <p class="qform-hint">Share your current Academic Details so we can connect you with relevant Student Chapter opportunities.</p>
+
+        <div class="qform-grid">
+          <label class="qfield">
+            Institution / College *
+            <input type="text" formControlName="institution" />
+          </label>
+          <label class="qfield">
+            Student Id / Registration Number *
+            <input type="text" formControlName="studentId" />
+          </label>
+          <label class="qfield">
+            Course / Programme *
+            <input type="text" formControlName="course" />
+          </label>
+          <label class="qfield">
+            Year of Study *
+            <select formControlName="yearOfStudy">
+              <option value="">Select Year</option>
+              <option value="First year">First Year</option>
+              <option value="Second year">Second Year</option>
+              <option value="Third year">Third Year</option>
+              <option value="Final year">Final Year</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset class="qform-fieldset accent-teal" *ngIf="showStudentFields" formGroupName="preferredRoles">
+        <legend><span class="qform-num">V</span> Volunteer Preference</legend>
+        <p class="qform-hint">Let us know if you are open to volunteering for ISTD student activities and chapter initiatives.</p>
+
+        <label class="qfield qfield--full">
+          Are you willing to volunteer for ISTD student activities? *
+          <div class="qform-radios">
+            <label class="qradio">
+              <input type="radio" formControlName="wouldLikeToVolunteer" value="Yes" />
+              <span>Yes</span>
+            </label>
+            <label class="qradio">
+              <input type="radio" formControlName="wouldLikeToVolunteer" value="No" />
+              <span>No</span>
+            </label>
+          </div>
+        </label>
+      </fieldset>
+
+      <fieldset class="qform-fieldset accent-indigo" *ngIf="showInstitutionalFields" formGroupName="institutionDetails">
+        <legend><span class="qform-num">I</span> {{ selectedMemberType === 'Student Chapter' ? 'Student Chapter Details' : 'Institutional Details' }}</legend>
+        <p class="qform-hint" *ngIf="selectedMemberType === 'Student Chapter'">Provide the chapter details for campus coordination, faculty leadership, and chapter planning.</p>
+        <p class="qform-hint" *ngIf="selectedMemberType !== 'Student Chapter'">Provide the institutional details for your organization, chapter coordination, and institutional engagement.</p>
+
+        <div class="qform-grid">
+          <label class="qfield">
+            Institution Name *
+            <input type="text" formControlName="institutionName" />
+          </label>
+          <label class="qfield">
+            Institution Type *
+            <input type="text" formControlName="institutionType" placeholder="College, School, University, NGO, etc." />
+          </label>
+          <label class="qfield">
+            Coordinator Name *
+            <input type="text" formControlName="coordinatorName" />
+          </label>
+          <label class="qfield">
+            Coordinator Role *
+            <input type="text" formControlName="coordinatorRole" />
+          </label>
+          <label class="qfield">
+            Campus / City *
+            <input type="text" formControlName="campusLocation" />
+          </label>
+          <label class="qfield qfield--full">
+            Student Chapter Objective *
+            <textarea rows="3" formControlName="studentChapterObjective"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 2. PROFESSIONAL DETAILS ============ -->
+      <fieldset class="qform-fieldset" *ngIf="showProfessionalFields" formGroupName="professional">
+        <legend><span class="qform-num">2</span> {{ selectedMemberType === 'Individual' ? 'Individual Background' : 'Professional Details' }}</legend>
+
+        <div class="qform-grid">
+          <label class="qfield">
+            Current Designation *
+            <input type="text" formControlName="designation" />
+          </label>
+          <label class="qfield">
+            Name of Organization *
+            <input type="text" formControlName="organization" />
+          </label>
+          <label class="qfield qfield--full">
+            Previous Organizations *
+            <input type="text" formControlName="previousOrganizations" />
+          </label>
+          <label class="qfield">
+            Total Experience (Years) *
+            <input type="number" min="0" formControlName="totalExperience" />
+          </label>
+          <label class="qfield">
+            Total Training Experience (Years) *
+            <input type="number" min="0" formControlName="trainingExperience" />
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 3. PREFERRED PROFESSIONAL ROLE ============ -->
+      <fieldset class="qform-fieldset accent-teal" *ngIf="showProfessionalFields" formGroupName="preferredRoles">
+        <legend><span class="qform-num">3</span> Preferred Professional Role</legend>
+        <p class="qform-hint">Select all the Roles through which you would like to contribute to training, skill development, and workplace learning at ISTD.</p>
+
+        <div class="qform-checks">
+          <label class="qcheck" *ngFor="let opt of roleOptions">
+            <input type="checkbox" [formControlName]="opt.key" />
+            <span>{{ opt.label }}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 4. AREA OF EXPERTISE ============ -->
+      <fieldset class="qform-fieldset" *ngIf="showProfessionalFields">
+        <legend><span class="qform-num">4</span> Area of Expertise</legend>
+        <p class="qform-hint">Include your Sector and specialist area, such as AI-enabled learning, employability, leadership, entrepreneurship, digital skills, assessment, or sector-specific capability development.</p>
+
+        <label class="qfield qfield--full">
+          <textarea rows="2" formControlName="expertise"></textarea>
+        </label>
+      </fieldset>
+
+      <!-- ============ 5. TRAINING DETAILS ============ -->
+      <fieldset class="qform-fieldset accent-violet" *ngIf="showProfessionalFields">
+        <legend><span class="qform-num">5</span> Training Details</legend>
+
+        <div class="qform-subblock" formGroupName="languages">
+          <h4>Languages for Training</h4>
+          <div class="qform-checks">
+            <label class="qcheck" *ngFor="let opt of languageOptions">
+              <input type="checkbox" [formControlName]="opt.key" />
+              <span>{{ opt.label }}</span>
+            </label>
+          </div>
+        </div>
+        <label class="qfield qfield--inline" *ngIf="form.get('languages.other')?.value">
+          Please specify other Language
+          <input type="text" formControlName="otherLanguage" />
+        </label>
+
+        <div class="qform-subblock">
+          <h4>Preferred Location</h4>
+          <label class="qfield qfield--inline">
+            Enter the City, Region, or Location you prefer
+            <input type="text" formControlName="preferredLocation" placeholder="Example, Bengaluru or Online" />
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 6. COMPANY / ORGANIZATION REPRESENTATION ============ -->
+      <fieldset class="qform-fieldset accent-amber" *ngIf="showProfessionalFields">
+        <legend><span class="qform-num">6</span> Company / Organization Representation</legend>
+
+        <label class="qfield qfield--full">
+          Do you own, co-own, or represent a Company / Organization? *
+          <div class="qform-radios">
+            <label class="qradio">
+              <input type="radio" formControlName="representsCompany" value="Yes" />
+              <span>Yes</span>
+            </label>
+            <label class="qradio">
+              <input type="radio" formControlName="representsCompany" value="No" />
+              <span>No</span>
+            </label>
+            <label class="qradio">
+              <input type="radio" formControlName="representsCompany" value="Previously" />
+              <span>Previously</span>
+            </label>
+          </div>
+        </label>
+
+        <div class="qform-conditional" *ngIf="representsCompanyYes" formGroupName="company">
+          <p class="qform-hint">If "Yes", complete the details below.</p>
+          <div class="qform-grid">
+            <label class="qfield">
+              Company Name *
+              <input type="text" formControlName="name" />
+            </label>
+            <label class="qfield">
+              Your Role in the Company *
+              <input type="text" formControlName="role" />
+            </label>
+            <label class="qfield qfield--full">
+              Company Address with Postal Code
+              <textarea rows="2" formControlName="address"></textarea>
+            </label>
+            <label class="qfield">
+              Number of Employees
+              <input type="number" min="0" formControlName="employees" />
+            </label>
+            <label class="qfield">
+              Company Website
+              <input type="url" formControlName="website" placeholder="https://" />
+            </label>
+          </div>
+
+          <div class="qform-subblock" formGroupName="natureOfBusiness">
+            <h4>Nature of Business *</h4>
+            <div class="qform-checks">
+              <label class="qcheck" *ngFor="let opt of natureOfBusinessOptions">
+                <input type="checkbox" [formControlName]="opt.key" />
+                <span>{{ opt.label }}</span>
+              </label>
+            </div>
+          </div>
+          <label class="qfield qfield--inline" *ngIf="form.get('company.natureOfBusiness.other')?.value">
+            If "Other", please specify
+            <input type="text" formControlName="otherBusiness" />
+          </label>
+
+          <label class="qfield qfield--full">
+            Services Offered
+            <textarea rows="2" formControlName="servicesOffered"></textarea>
+          </label>
+
+          <label class="qfield qfield--full">
+            Interested in Collaborating as an Agency with ISTD? *
+            <div class="qform-radios">
+              <label class="qradio">
+                <input type="radio" formControlName="interestedCollaborating" value="Yes" />
+                <span>Yes</span>
+              </label>
+              <label class="qradio">
+                <input type="radio" formControlName="interestedCollaborating" value="No" />
+                <span>No</span>
+              </label>
+              <label class="qradio">
+                <input type="radio" formControlName="interestedCollaborating" value="Later" />
+                <span>Later</span>
+              </label>
+            </div>
+          </label>
+
+          <label class="qfield qfield--full">
+            Collaboration Area
+            <input type="text" formControlName="collaborationArea" />
+          </label>
+
+          <div class="qform-subblock" formGroupName="canProvide">
+            <h4>Can your Organization provide any of the following?</h4>
+            <p class="qform-hint">Select all that apply.</p>
+            <div class="qform-checks">
+              <label class="qcheck" *ngFor="let opt of canProvideOptions">
+                <input type="checkbox" [formControlName]="opt.key" />
+                <span>{{ opt.label }}</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ============ 7. MAJOR CLIENTS ============ -->
+      <fieldset class="qform-fieldset accent-emerald" *ngIf="showProfessionalFields || showInstitutionalFields">
+        <legend><span class="qform-num">7</span> Major Clients on Skill Development</legend>
+        <p class="qform-hint">List the Companies / Organizations you have worked with.</p>
+
+        <label class="qfield qfield--full">
+          <textarea rows="4" formControlName="majorClients"></textarea>
+        </label>
+      </fieldset>
+
+      <!-- ============ 8. UPLOADS ============ -->
+      <fieldset class="qform-fieldset accent-sky" formGroupName="uploads">
+        <legend><span class="qform-num">8</span> Files</legend>
+        <p class="qform-hint">File uploads are simulated — filenames are saved, not the file contents.</p>
+
+        <div class="qform-grid">
+          <label class="qfield">
+            Passport-size Photograph *
+            <input type="file" accept="image/*" (change)="onFileSelected($event, 'uploads.photo')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.photo']">{{ fileNames['uploads.photo'] }}</span>
+          </label>
+
+          <label class="qfield">
+            Aadhaar Copy *
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event, 'uploads.aadhaar')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.aadhaar']">{{ fileNames['uploads.aadhaar'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showPanUploadField">
+            PAN Copy *
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event, 'uploads.pan')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.pan']">{{ fileNames['uploads.pan'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showStudentUploadFields">
+            Student ID / Enrollment Proof *
+            <input type="file" accept=".pdf,.jpg,.jpeg,.png" (change)="onFileSelected($event, 'uploads.studentIdProof')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.studentIdProof']">{{ fileNames['uploads.studentIdProof'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showStudentResumeUploadField">
+            Student Resume *
+            <input type="file" accept=".pdf,.doc,.docx" (change)="onFileSelected($event, 'uploads.studentResume')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.studentResume']">{{ fileNames['uploads.studentResume'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showProfessionalUploadFields">
+            Resume / CV *
+            <input type="file" accept=".pdf,.doc,.docx" (change)="onFileSelected($event, 'uploads.resume')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.resume']">{{ fileNames['uploads.resume'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showProfessionalUploadFields">
+            Certifications (Zip multiple files if needed)
+            <input type="file" accept=".pdf,.doc,.docx,image/*" (change)="onFileSelected($event, 'uploads.certifications')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.certifications']">{{ fileNames['uploads.certifications'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showProfessionalUploadFields">
+            Company Profile (if you filled Section 6)
+            <input type="file" accept=".pdf,.doc,.docx" (change)="onFileSelected($event, 'uploads.companyProfile')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.companyProfile']">{{ fileNames['uploads.companyProfile'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showInstitutionUploadFields">
+            Institutional Proof *
+            <input type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" (change)="onFileSelected($event, 'uploads.institutionLetter')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.institutionLetter']">{{ fileNames['uploads.institutionLetter'] }}</span>
+          </label>
+
+          <label class="qfield" *ngIf="showStudentChapterUploadFields">
+            Election Results *
+            <input type="file" accept=".pdf,.doc,.docx" (change)="onFileSelected($event, 'uploads.chapterPlan')" />
+            <span class="qfile-name" *ngIf="fileNames['uploads.chapterPlan']">{{ fileNames['uploads.chapterPlan'] }}</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- ============ 9. DECLARATION ============ -->
+      <fieldset class="qform-fieldset">
+        <legend><span class="qform-num">9</span> Declaration</legend>
+
+        <label class="qcheck qcheck--declaration">
+          <input type="checkbox" formControlName="declaration" />
+          <span>I hereby declare that the information provided is true and correct to the best of my knowledge. *</span>
+        </label>
+        <div class="qform-grid">
+          <label class="qfield">
+            Signature *
+            <input type="text" formControlName="signature" />
+          </label>
+          <label class="qfield">
+            Date *
+            <input type="date" formControlName="date" />
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="qform-submit-row" *ngIf="!submitted">
+        <p class="qform-submit-hint" *ngIf="form.invalid && form.touched">
+          Please complete all mandatory (*) fields before submitting.
+        </p>
+        <p class="qform-submit-hint" *ngIf="errorMessage" role="alert">{{ errorMessage }}</p>
+        <div class="qform-submit-actions" *ngIf="isEditing">
+          <button type="button" class="btn btn--ghost-dark" (click)="cancelEdit()" [disabled]="isLoading">Cancel</button>
+          <button type="submit" class="btn btn--primary" [disabled]="isLoading || !profileLoaded">
+            {{ isLoading ? 'Saving...' : 'Save Changes' }}
+          </button>
+        </div>
+        <button *ngIf="!isEditing" type="submit" class="btn btn--primary" [disabled]="isLoading || !profileLoaded">
+          {{ isLoading ? 'Saving...' : 'Save Profile' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

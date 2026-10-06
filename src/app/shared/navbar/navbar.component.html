@@ -2,9 +2,18 @@
 
 <div class="topbar">
   <div class="container topbar__row">
-    <div class="topbar__item">{{ contact.phone }}</div>
-    <div class="topbar__item">{{ contact.email }}</div>
     <div class="topbar__item topbar__item--motto">Established {{ site.established }} &middot; Southern Region</div>
+    <div class="topbar__socials" aria-label="Social media links">
+      <a *ngFor="let social of contact.socialLinks" [href]="social.url" target="_blank" rel="noopener noreferrer" [attr.aria-label]="social.label" class="topbar__social-link">
+        <svg *ngIf="social.icon === 'linkedin'" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.5A1.5 1.5 0 1 1 6.94 5.5a1.5 1.5 0 0 1 0 3ZM5.5 9.75h2.9v8.75H5.5V9.75Zm4.68 0h2.77v1.2h.04c.39-.74 1.33-1.52 2.74-1.52 2.93 0 3.47 1.92 3.47 4.42v4.65h-2.9v-4.35c0-1.04-.02-2.38-1.45-2.38-1.46 0-1.68 1.14-1.68 2.31v4.42h-2.9V9.75Z"/></svg>
+        <svg *ngIf="social.icon === 'x'" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2h3.4l-7.43 8.49L22.5 22h-6.68l-5.22-7.16L4.5 22H1.1l7.97-9.1L1.5 2h6.86l4.7 6.59L18.9 2Zm-1.2 18h1.86L7.2 3.9H5.2L17.7 20Z"/></svg>
+        <svg *ngIf="social.icon === 'facebook'" viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V7.5c0-.93.26-1.56 1.6-1.56H17V2.9c-.28-.04-1.24-.1-2.35-.1-2.33 0-3.93 1.42-3.93 4.04V10.8H8v3.2h2.72v8h2.78Z"/></svg>
+        <svg *ngIf="social.icon === 'instagram'" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5A5.5 5.5 0 1 1 6.5 13 5.5 5.5 0 0 1 12 7.5Zm0 2A3.5 3.5 0 1 0 15.5 13 3.5 3.5 0 0 0 12 9.5Zm5.25-3.35a1.15 1.15 0 1 1-1.15 1.15 1.15 1.15 0 0 1 1.15-1.15Z"/></svg>
+        <svg *ngIf="social.icon === 'youtube'" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.9 4.7 12 4.7 12 4.7s-5.9 0-7.5.4A3 3 0 0 0 2.4 7.2 31.9 31.9 0 0 0 2 12a31.9 31.9 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.6.4 7.5.4 7.5.4s5.9 0 7.5-.4a3 3 0 0 0 2.1-2.1A31.9 31.9 0 0 0 22 12a31.9 31.9 0 0 0-.4-4.8ZM10 15.5v-7l6 3.5-6 3.5Z"/></svg>
+      </a>
+    </div>
+    <div class="topbar__item">{{ contact.email }}</div>
+    <div class="topbar__item">{{ contact.phone }}</div>
   </div>
 </div>
 
@@ -23,6 +32,23 @@
          (click)="closeMenu()">
         {{ link.label }}
       </a>
+      <a *ngIf="!isLoggedIn()" routerLink="/login" class="nav__login" routerLinkActive="is-active" (click)="closeMenu()">Log In</a>
+      <div *ngIf="isLoggedIn()" class="nav__profile" [class.nav__profile--open]="profileMenuOpen">
+        <button type="button" class="nav__profile-trigger" (click)="toggleProfileMenu()" [attr.aria-expanded]="profileMenuOpen" aria-haspopup="menu">
+          <span class="nav__profile-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          </span>
+          <span class="nav__profile-chevron" aria-hidden="true"></span>
+        </button>
+        <div class="nav__profile-menu" *ngIf="profileMenuOpen" role="menu">
+          <div class="nav__profile-identity">
+            <span>User</span>
+            <strong>{{ username }}</strong>
+          </div>
+          <a routerLink="/profile" (click)="closeMenu()" role="menuitem">Profile</a>
+          <button type="button" class="nav__profile-logout" (click)="logout()" role="menuitem">Log Out</button>
+        </div>
+      </div>
     </nav>
 
     <button class="nav__toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen" aria-label="Toggle menu">

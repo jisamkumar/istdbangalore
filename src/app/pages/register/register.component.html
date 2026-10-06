@@ -1,0 +1,73 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Profile Access</span>
+    <h1>Create your Profile</h1>
+    <p class="page-hero__sub">Register with your email to update your Profile and connect with opportunities.</p>
+  </div>
+</section>
+
+<section class="section register-section">
+  <div class="container register-layout">
+    <div class="register-intro">
+      <span class="eyebrow">Join the Network</span>
+      <h2>Start building your Profile with ISTD.</h2>
+      <p>Your account gives you access to your Profile, where you can share your learning interests, experience, volunteer preferences, and collaboration goals.</p>
+      <a routerLink="/login" class="text-link">Already have an Account? Log In <span aria-hidden="true">→</span></a>
+    </div>
+
+    <form class="register-card card" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+      <div class="register-card__heading">
+        <span class="register-card__mark"><img src="assets/istd-logo-purple.png" alt="ISTD logo" /></span>
+        <div>
+          <h2>Create Account</h2>
+          <p>Use the email address you want associated with ISTD.</p>
+        </div>
+      </div>
+
+      <label class="register-field register-field--select">
+        I am registering as
+        <span class="register-select-control">
+          <select name="memberType" [(ngModel)]="memberType" required>
+            <option value="Student">Student</option>
+            <option value="Professional">Professional</option>
+            <option value="Individual">Individual Member</option>
+            <option value="Institutional">Institutional Member</option>
+            <option value="Student Chapter">Student Chapter</option>
+          </select>
+          <span class="register-select-control__icon" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <label class="register-field">
+        Full Name
+        <input type="text" name="fullName" [(ngModel)]="fullName" required autocomplete="name" />
+      </label>
+
+      <label class="register-field">
+        Email Address
+        <input type="email" name="email" [(ngModel)]="email" required autocomplete="email" />
+      </label>
+
+      <label class="register-field">
+        Mobile Phone Number
+        <input type="tel" name="mobile" [(ngModel)]="mobile" required autocomplete="tel" />
+      </label>
+
+      <label class="register-field">
+        Password
+        <input type="password" name="password" [(ngModel)]="password" required autocomplete="new-password" />
+      </label>
+
+      <label class="register-field">
+        Confirm Password
+        <input type="password" name="confirmPassword" [(ngModel)]="confirmPassword" required autocomplete="new-password" />
+      </label>
+
+      <p class="register-error" *ngIf="submitted && errorMessage" role="alert">{{ errorMessage }}</p>
+
+      <button type="submit" class="btn btn--primary" [disabled]="isLoading">
+        {{ isLoading ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+  </div>
+</section>

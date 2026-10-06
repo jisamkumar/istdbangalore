@@ -2,16 +2,13 @@
 <section class="hero">
   <div class="container hero__row">
     <div class="hero__copy">
-      <span class="eyebrow">Indian Society for Training &amp; Development</span>
-      <h1>Train & Skill<br />Building Nation<br /><em>Since {{ site.established }}</em></h1>
+      <h1 class="hero__title"><span>Training & Skill</span><span>Transformation</span><em>Since {{ site.established }}</em></h1>
       <p class="hero__lede">
-        Catylyse India's learning, skill development, and employability through trainer
-        development, workplace learning, digital capability, and a connected professional
-        ecosystem for a future-ready workforce.
+        Empowering individuals and organisations through future-ready learning, professional development, trainer capacity building, institutional support, and a strong professional network.
       </p>
       <div class="hero__actions">
         <a routerLink="/membership" class="btn btn--primary">Become a Member</a>
-        <a routerLink="/events" class="btn btn--outline-navy">View Upcoming Events</a>
+        <a routerLink="/student-chapter" class="btn btn--outline-navy">Start Student Chapter</a>
       </div>
     </div>
 
@@ -20,7 +17,6 @@
       (mouseenter)="stopAutoplay()"
       (mouseleave)="startAutoplay()"
     >
-      <span class="eyebrow hero__carousel-eyebrow">What Is On!</span>
       <div class="carousel">
         <div
           class="carousel__track"
