@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 interface AuthResponse {
   message?: string;
@@ -17,7 +18,8 @@ export class AuthService {
   private readonly fullNameKey = 'istd-member-full-name';
   private readonly mobileKey = 'istd-member-mobile';
   private readonly memberTypeKey = 'istd-member-type';
-  private readonly apiUrl = 'http://localhost:8088/auth';
+  private apiUrl = environment.apiUrl;
+  private readonly apiURL = '${this.apiUrl}/auth';
 
   constructor(private http: HttpClient) {}
 
@@ -58,13 +60,13 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { username: email, password }).pipe(
+    return this.http.post<AuthResponse>(`${this.apiURL}/login`, { username: email, password }).pipe(
       tap((response) => this.storeSession(response, email, response?.['memberType'] as string | undefined)),
     );
   }
 
   register(email: string, password: string, memberType: string = 'Candidate', fullName?: string, mobile?: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.apiUrl}/register`, {
+    return this.http.post<AuthResponse>(`${this.apiURL}/register`, {
       username: email,
       password,
       memberType,
