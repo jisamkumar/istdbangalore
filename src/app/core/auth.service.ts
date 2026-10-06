@@ -17,7 +17,7 @@ export class AuthService {
   private readonly fullNameKey = 'istd-member-full-name';
   private readonly mobileKey = 'istd-member-mobile';
   private readonly memberTypeKey = 'istd-member-type';
-  private readonly apiURL = 'auth';
+  private readonly apiURL = 'https://istdbangaloreweb.onrender.com/auth';
 
   constructor(private http: HttpClient) {}
 

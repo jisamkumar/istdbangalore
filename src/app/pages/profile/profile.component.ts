@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     { value: 'Student Chapter', label: 'Student Chapter' },
   ];
   
-  private readonly profilesApiUrl = 'api/profiles';
+  private readonly profilesApiUrl = 'https://istdbangaloreweb.onrender.com/api/profiles';
   private readonly profileStorageKey = 'istd-member-profile';
   private profileSnapshot: any = null;
 
