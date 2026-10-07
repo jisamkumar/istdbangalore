@@ -93,7 +93,7 @@ export const EVENTS: EventItem[] = [
     mode: 'Online',
     imageUrl: 'assets/1.jpg',
     description: 'The key to remain relevant and achieve success in the BANI (Brittle, Anxious, Non-Linear, and Incomprehensible) world is by learning how to renew yourself constantly.',
-    status: 'Past',
+    status: 'Upcoming',
   },
   {
     title: 'From Learning to Behaviour Change',
@@ -101,7 +101,7 @@ export const EVENTS: EventItem[] = [
     mode: 'Online',
     imageUrl: 'assets/2.jpg',
     description: 'Why Training does not always create the Performance?',
-    status: 'Past',
+    status: 'Upcoming',
   },
   {
     title: 'Distruptive Innovation',
