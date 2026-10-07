@@ -101,7 +101,7 @@ export const EVENTS: EventItem[] = [
     mode: 'Online',
     imageUrl: 'assets/2.jpg',
     description: 'Why Training does not always create the Performance?',
-    status: 'Upcoming',
+    status: 'Past',
   },
   {
     title: 'Distruptive Innovation',
