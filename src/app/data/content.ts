@@ -108,7 +108,7 @@ export const EVENTS: EventItem[] = [
     date: '28 November 2026',
     mode: 'In-Person',
     imageUrl: 'assets/3.jpg',
-    description: 'The world is changing faster than ever. Technologies, customer expectations, business models and workplace practices that seemed futuristic yesterday are becoming everyday realities today.',
+    description: 'Real world is changing faster than ever. Technologies, customer expectations, business models and workplace practices that seemed futuristic yesterday are becoming everyday realities today.',
     status: 'Upcoming',
   },
   {
