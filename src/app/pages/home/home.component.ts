@@ -57,9 +57,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   stats = [
-    { value: '600 +', label: 'Bangalore Chapter Members', accent: 'red' },
-    { value: '100 +', label: 'Bangalore Student Chapters', accent: 'teal' },
-    { value: '100000 +', label: 'Successful Skill Training/Assessments', accent: 'violet' },
+    { value: '500 +', label: 'Bangalore Chapter Members', accent: 'red' },
+    { value: '10 +', label: 'Bangalore Student Chapters', accent: 'teal' },
+    { value: '100000 +', label: 'Successful Skill Assessments', accent: 'violet' },
     { value: '1000 +', label: 'PG Diploma Graduates Trained', accent: 'amber' },
   ];
 
