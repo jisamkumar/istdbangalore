@@ -76,8 +76,8 @@ export const ABOUT = {
 // ⚠ PLACEHOLDER — replace with actual office bearers for the current term
 export const COMMITTEE: CommitteeMember[] = [
   { name: 'Dr. Rashmi M.J.', designation: 'Chairwoman', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/chairperson.jpeg' },
-  { name: 'J I Samkumar J.', designation: 'Vice Chairman', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/vice-chairperson.jpeg' },
-  { name: 'Samuel P.', designation: 'Interim Honorary Secretary', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/secretary.jpeg' },
+  { name: 'Samkumar J. J I', designation: 'Vice Chairman', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/vice-chairperson.jpeg' },
+  { name: 'Samuel P.', designation: 'Honorary Secretary', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/secretary.jpeg' },
   { name: 'Tabitha P.', designation: 'Honorary Treasurer', organisation: 'ISTD Bangalore Chapter', photoUrl: 'assets/committee/treasurer.jpeg' },
   { name: 'Megha S.', designation: 'MC Member', photoUrl: 'assets/committee/mc-member3.jpeg' },
   { name: 'Roopa S.', designation: 'MC Member', photoUrl: 'assets/committee/mc-member1.jpeg' },
